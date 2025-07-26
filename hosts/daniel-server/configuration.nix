@@ -18,10 +18,6 @@
       "nix-command"
       "flakes"
     ];
-    trusted-users = [
-      "root"
-      "danieldbird"
-    ];
   };
 
   networking.hostName = "daniel-server";
@@ -36,6 +32,22 @@
         browseable = true;
         readOnly = false;
         validUsers = [ "danieldbird" ];
+        createMask = "0700";
+        directoryMask = "0700";
+        vetoFiles = [
+          ".DS_Store"
+          "._*"
+        ];
+        vetoFilesOp = "delete";
+      };
+
+      root = {
+        path = "/";
+        browseable = true;
+        readOnly = false;
+        validUsers = [
+          "danieldbird"
+        ];
         createMask = "0700";
         directoryMask = "0700";
         vetoFiles = [

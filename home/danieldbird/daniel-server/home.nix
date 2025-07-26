@@ -8,7 +8,6 @@
 {
   imports = [ ];
 
-  home.stateVersion = "25.05";
   home = {
     username = "danieldbird";
     homeDirectory = "/home/danieldbird";
@@ -36,6 +35,14 @@
     shellAliases = {
       c = "clear";
       reload = "source ~/.zshrc";
+      nixrebuild = "sudo nixos-rebuild switch --flake ~/nixconfig#daniel-server";
+      homerebuild = "home-manager switch --flake ~/nixconfig#danieldbird@daniel-server";
+      rebuild = "nixrebuild && homerebuild";
+      nixgens = "sudo nixos-rebuild list-generations";
+      homegens = "home-manager generations";
+      nixclean = "sudo nix-env --delete-generations +5 --profile /nix/var/nix/profiles/system && nix-collect-garbage -d";
+      homeclean = "nix-env --delete-generations +5 --profile ~/.local/state/nix/profiles/home-manager";
+      cleanup = "nixclean && homeclean";
     };
   };
 
@@ -57,5 +64,5 @@
     };
   };
 
-  systemd.user.startServices = "sd-switch";
+  home.stateVersion = "25.05";
 }

@@ -59,6 +59,11 @@
     };
   };
 
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+  };
+
   time.timeZone = "Australia/Brisbane";
 
   # Select internationalisation properties.
